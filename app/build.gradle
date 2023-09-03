@@ -71,4 +71,7 @@ dependencies {
     //Network Listener
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
     debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
+
+    //lottie
+    implementation "com.airbnb.android:lottie:6.0.0"
 }

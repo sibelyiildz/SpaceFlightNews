@@ -8,6 +8,7 @@ import com.example.spaceflightnewsapp.data.remote.model.ArticlesResponse
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsUseCase
 import com.example.spaceflightnewsapp.util.Resource
 import com.example.spaceflightnewsapp.util.Result
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
@@ -26,6 +27,7 @@ class NewsViewModel(
                 }
 
                 is Resource.Success -> {
+                    delay(3000)
                     _news.postValue(Result.Success(response.data))
                 }
             }
