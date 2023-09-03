@@ -7,13 +7,20 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.spaceflightnewsapp.ui.NewsFragment"
+        android:name="com.example.spaceflightnewsapp.ui.newslist.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.example.spaceflightnewsapp.ui.newsdetail.NewsDetailFragment"
+        android:label="fragment_news_detail"
+        tools:layout="@layout/fragment_news_detail" />
 
 
     <action
         android:id="@+id/action_newsFragment"
         app:destination="@id/newsFragment" />
-
+    <action
+        android:id="@+id/action_newsDetailFragment"
+        app:destination="@id/newsDetailFragment" />
 </navigation>
