@@ -27,7 +27,6 @@ class NewsViewModel(
                 }
 
                 is Resource.Success -> {
-                    delay(3000)
                     _news.postValue(Result.Success(response.data))
                 }
             }

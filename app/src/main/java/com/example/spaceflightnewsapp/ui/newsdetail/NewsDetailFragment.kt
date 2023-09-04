@@ -13,5 +13,8 @@ class NewsDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.collapsingToolbar.title =
+            "ksd c knds vdjv dfnv rvjrbe ver ve wejkfejferfberjkf eıj rvrjvfm jerkfner e"
     }
 }

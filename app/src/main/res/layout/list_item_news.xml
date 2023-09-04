@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/divider_margin_8"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/margin10"
+    android:showDividers="middle">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/newsImage"
+        android:layout_width="@dimen/margin100"
+        android:layout_height="@dimen/margin80"
+        android:background="@color/gray"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.ShapeableImageView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_margin_4"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.16"
+            tools:text="News Title" />
+
+        <TextView
+            android:id="@+id/newsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
+            tools:text="News Description" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin4"
+            android:divider="@drawable/divider_margin_4"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/newsSite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.14"
+                android:textColor="@color/purple_navy"
+                tools:text="News Site" />
+
+            <View
+                android:layout_width="@dimen/margin4"
+                android:layout_height="@dimen/margin4"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_circle" />
+
+            <TextView
+                android:id="@+id/publishedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
+                android:textColor="@color/suva_gray"
+                tools:text="published date" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.spaceflightnewsapp.util.extension
+package com.example.spaceflightnewsapp.extension
 
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

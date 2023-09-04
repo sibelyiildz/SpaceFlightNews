@@ -4,10 +4,10 @@ data class ArticlesResponse(
     val count: Int?,
     val next: String?,
     val previous: String?,
-    val results: List<Result>?
+    val results: List<NewsModel>?
 )
 
-data class Result(
+data class NewsModel(
     val events: List<Event>?,
     val featured: Boolean?,
     val id: Int?,

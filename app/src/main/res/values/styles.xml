@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SpaceFlight.Toolbar" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:minHeight">@dimen/toolbar_height</item>
+        <item name="titleTextAppearance">@style/SpaceFlight.TextAppearance.Regular.14</item>
+        <item name="subtitleTextAppearance">@style/SpaceFlight.TextAppearance.Regular.12</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="subtitleTextColor">@color/black</item>
+    </style>
+
+
+    <style name="ShapeAppearance.ShapeableImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/margin8</item>
+    </style>
+
+
+</resources>
