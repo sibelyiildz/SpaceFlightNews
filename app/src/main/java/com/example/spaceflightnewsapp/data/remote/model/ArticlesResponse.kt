@@ -10,7 +10,7 @@ data class ArticlesResponse(
 data class NewsModel(
     val events: List<Event>?,
     val featured: Boolean?,
-    val id: Int?,
+    val id: Int,
     val image_url: String?,
     val launches: List<Launche>?,
     val news_site: String?,

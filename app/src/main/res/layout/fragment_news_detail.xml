@@ -19,10 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
             app:collapsedTitleTextColor="@color/black"
             app:contentScrim="@color/white"
-            app:expandedTitleMarginBottom="25dp"
-            app:expandedTitleMarginStart="15dp"
+            app:expandedTitleMarginStart="@dimen/margin20"
             app:expandedTitleTextAppearance="@style/SpaceFlight.TextAppearance.Regular.16"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:maxLines="4"
@@ -32,10 +32,10 @@
                 android:id="@+id/newsImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription" />
 
             <View
                 android:layout_width="match_parent"
@@ -49,7 +49,6 @@
                 android:layout_height="?actionBarSize"
                 android:contentInsetStart="0dp"
                 android:navigationIcon="@drawable/vc_toolbar_back"
-                android:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -60,15 +59,56 @@
         android:overScrollMode="never"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <TextView
-            android:id="@+id/summary"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:text="lorem"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin16"
+            android:divider="@drawable/divider_margin_8"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin4"
+                android:divider="@drawable/divider_margin_4"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:id="@+id/newsSite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.12"
+                    android:textColor="@color/purple_navy"
+                    tools:text="News Site" />
+
+                <View
+                    android:layout_width="@dimen/margin4"
+                    android:layout_height="@dimen/margin4"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_circle" />
+
+                <TextView
+                    android:id="@+id/publishedDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.12"
+                    android:textColor="@color/suva_gray"
+                    tools:text="published date" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
+                android:textColor="@color/slate_grey"
+                android:textStyle="bold"
+                tools:text="lorem" />
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,6 +2,7 @@ package com.example.spaceflightnewsapp.data.repository
 
 import com.example.spaceflightnewsapp.data.remote.RemoteDataSource
 import com.example.spaceflightnewsapp.data.remote.model.ArticlesResponse
+import com.example.spaceflightnewsapp.data.remote.model.NewsModel
 import com.example.spaceflightnewsapp.domain.repository.NewsRepository
 
 class NewsRepositoryImp(
@@ -11,5 +12,9 @@ class NewsRepositoryImp(
 
     override suspend fun getArticles(): ArticlesResponse {
         return remoteDataSource.getArticles()
+    }
+
+    override suspend fun getArticleDetail(id: Int): NewsModel {
+        return remoteDataSource.getArticleDetail(id)
     }
 }

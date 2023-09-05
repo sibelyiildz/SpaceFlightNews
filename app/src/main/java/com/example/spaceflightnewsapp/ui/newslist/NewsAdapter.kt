@@ -68,7 +68,8 @@ class NewsAdapter() : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filt
                 newsImage.setImageUrl(binding.root.context, data.image_url)
 
                 root.setOnClickListener {
-                    it.findNavController().navigate(NavGraphDirections.actionNewsDetailFragment())
+                    it.findNavController()
+                        .navigate(NavGraphDirections.actionNewsDetailFragment(data.id))
                 }
             }
         }

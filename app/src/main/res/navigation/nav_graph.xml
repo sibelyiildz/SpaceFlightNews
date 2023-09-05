@@ -14,7 +14,11 @@
         android:id="@+id/newsDetailFragment"
         android:name="com.example.spaceflightnewsapp.ui.newsdetail.NewsDetailFragment"
         android:label="fragment_news_detail"
-        tools:layout="@layout/fragment_news_detail" />
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
 
     <action
