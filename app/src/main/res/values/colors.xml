@@ -9,4 +9,6 @@
     <color name="soft_black">#150f0f</color>
     <color name="red">#EC0000</color>
     <color name="ghost_white">#FAFBFF</color>
+    <color name="slate_grey">#707D98</color>
+    <color name="light_blue">#A6AFC4</color>
 </resources>

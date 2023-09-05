@@ -3,6 +3,7 @@ package com.example.spaceflightnewsapp.ui.newslist
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import com.example.spaceflightnewsapp.base.BaseFragment
 import com.example.spaceflightnewsapp.databinding.FragmentNewsBinding
 import com.example.spaceflightnewsapp.extension.dialog
@@ -20,6 +21,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         super.onViewCreated(view, savedInstanceState)
 
         initialize()
+        setListeners()
 
         viewModel.fetchNews()
         viewModel.news.observe(viewLifecycleOwner) { response ->
@@ -53,4 +55,20 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         binding.newsRecyclerView.addItemDecoration(spaceDecorator)
 
     }
+
+    private fun setListeners() {
+        binding.searchView.setOnQueryTextListener(searchQueryTextListener)
+    }
+
+    private val searchQueryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            adapter.filter.filter(newText)
+            return true
+        }
+    }
+
 }

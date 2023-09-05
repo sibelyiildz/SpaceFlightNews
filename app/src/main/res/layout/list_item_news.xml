@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:divider="@drawable/divider_margin_8"
     android:orientation="horizontal"
-    android:paddingHorizontal="@dimen/margin10"
+    android:paddingHorizontal="@dimen/horizontal_margin"
     android:showDividers="middle">
 
     <com.google.android.material.imageview.ShapeableImageView

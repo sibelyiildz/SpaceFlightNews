@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpaceFlightNewsApp</string>
+    <string name="search_view_hint">Search News</string>
 </resources>

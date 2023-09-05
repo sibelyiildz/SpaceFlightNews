@@ -12,6 +12,17 @@
         <item name="subtitleTextColor">@color/black</item>
     </style>
 
+    <style name="SpaceFlight.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/bg_white_rounded</item>
+        <item name="queryBackground">@drawable/bg_white_rounded</item>
+        <item name="submitBackground">@drawable/bg_white_rounded</item>
+        <item name="closeIcon">@drawable/ic_close_search</item>
+        <item name="searchIcon">@drawable/ic_search_icon</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="android:elevation">@dimen/margin4</item>
+        <item name="android:editTextColor">@color/slate_grey</item>
+    </style>
+
 
     <style name="ShapeAppearance.ShapeableImageView" parent="">
         <item name="cornerFamily">rounded</item>
