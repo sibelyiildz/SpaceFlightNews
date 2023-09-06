@@ -19,7 +19,7 @@ class NewsAdapter() : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filt
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<NewsModel>() {
             override fun areItemsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
-                return oldItem.id === newItem.id
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {

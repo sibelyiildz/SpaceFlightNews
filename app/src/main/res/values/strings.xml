@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SpaceFlightNewsApp</string>
-    <string name="error">Hata</string>
-    <string name="okay">Tamam</string>
+    <string name="error">Error</string>
+    <string name="okay">Okay</string>
     <string name="search_view_hint">Search News</string>
+    <string name="new_headlines_message">New headlines added</string>
 </resources>

@@ -1,16 +1,19 @@
 package com.example.spaceflightnewsapp.ui.newslist
 
-import androidx.lifecycle.LiveData
+import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spaceflightnewsapp.data.local.SpaceFlightNewsEntity
-import com.example.spaceflightnewsapp.data.remote.model.ArticlesResponse
+import com.example.spaceflightnewsapp.data.remote.model.NewsModel
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsFromRoomUseCase
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsUseCase
 import com.example.spaceflightnewsapp.domain.usecase.InsertNewsToRoomUseCase
+import com.example.spaceflightnewsapp.extension.toLiveData
+import com.example.spaceflightnewsapp.extension.toSingleEvent
 import com.example.spaceflightnewsapp.util.Resource
 import com.example.spaceflightnewsapp.util.Result
+import com.example.spaceflightnewsapp.util.countDownTimer
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
@@ -19,27 +22,45 @@ class NewsViewModel(
     private val getNewsFromRoomUseCase: GetNewsFromRoomUseCase,
 ) : ViewModel() {
 
-    private val _news = MutableLiveData<Result<ArticlesResponse>>()
-    val news: LiveData<Result<ArticlesResponse>> = _news
+    private val _news = MutableLiveData<Result<ViewState>>()
+    val news = _news.toLiveData()
 
     private val _saveNews = MutableLiveData<Result<Unit>>()
-    val saveNews: LiveData<Result<Unit>> = _saveNews
+    val saveNews = _saveNews.toSingleEvent()
 
     private val _fetchNewsFromRoom = MutableLiveData<Result<List<SpaceFlightNewsEntity>>>()
-    val fetchNewsFromRoom: LiveData<Result<List<SpaceFlightNewsEntity>>> = _fetchNewsFromRoom
+    val fetchNewsFromRoom = _fetchNewsFromRoom.toSingleEvent()
 
-    fun fetchNews() {
+    private var viewState = ViewState()
+    private var timer: CountDownTimer? = null
+
+    init {
+        timer = countDownTimer(millisInFuture = 5000,
+            countDownInterval = 1000,
+            onTick = {},
+            onFinish = {
+                fetchNews(true)
+            })
+
+    }
+
+    fun fetchNews(isFromTimer: Boolean = false) {
+        timer?.cancel()
         viewModelScope.launch {
-            _news.postValue(Result.Loading)
+            if (isFromTimer.not()) _news.postValue(Result.Loading)
             when (val response = getNewsUseCase.execute(Unit)) {
-                is Resource.Failure -> {
-                    _news.postValue(Result.Error(response.error))
+                is Resource.Success -> {
+                    if (viewState.news != response.data.results) {
+                        viewState = viewState.copy(news = response.data.results, isNewNews = true)
+                        _news.postValue(Result.Success(viewState))
+                    }
                 }
 
-                is Resource.Success -> {
-                    _news.postValue(Result.Success(response.data))
+                is Resource.Failure -> {
+                    if (isFromTimer.not()) _news.postValue(Result.Error(response.error))
                 }
             }
+            timer?.start()
         }
     }
 
@@ -73,5 +94,17 @@ class NewsViewModel(
             }
         }
     }
+
+    fun timerCancel() {
+        timer?.cancel()
+    }
+
+    override fun onCleared() {
+        timer?.cancel()
+        timer = null
+        super.onCleared()
+    }
+
+    data class ViewState(val news: List<NewsModel>? = null, val isNewNews: Boolean = false)
 
 }

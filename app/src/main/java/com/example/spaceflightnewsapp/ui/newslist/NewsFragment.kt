@@ -3,10 +3,12 @@ package com.example.spaceflightnewsapp.ui.newslist
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import com.example.spaceflightnewsapp.R
 import com.example.spaceflightnewsapp.base.BaseFragment
 import com.example.spaceflightnewsapp.databinding.FragmentNewsBinding
-import com.example.spaceflightnewsapp.extension.dialog
+import com.example.spaceflightnewsapp.extension.errorDialog
 import com.example.spaceflightnewsapp.util.Result
 import com.example.spaceflightnewsapp.util.SpaceItemDecorationVertical
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,29 +26,37 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         setListeners()
 
         viewModel.fetchNews()
-        viewModel.news.observe(viewLifecycleOwner) { response ->
-            setLoading(response is Result.Loading)
-            when (response) {
-                is Result.Success -> {
-                    adapter.submitList(response.data?.results)
-                    Log.v("LogTag", "Success")
-                }
+        viewModel.news.observe(viewLifecycleOwner, ::newsObserver)
+    }
 
-                is Result.Error -> {
-                    Log.v("LogTag", "Error")
-                    dialog {
-                        setTitle("Hata")
-                        setMessage("Bir sorun oluştu")
-                        setCancelable(true)
-                        setPositiveButton("Tamam", null)
-                    }
-                }
-
-                Result.Loading -> {
-                    Log.v("LogTag", "Success")
-                }
-
+    private fun newsObserver(response: Result<NewsViewModel.ViewState>) {
+        setLoading(response is Result.Loading)
+        when (response) {
+            is Result.Success -> {
+                setUI(response.data)
             }
+
+            is Result.Error -> {
+                errorDialog {
+                    setMessage(response.error.message)
+                }
+            }
+
+            Result.Loading -> {
+                Log.v("LogTag", "Loading")
+            }
+
+        }
+    }
+
+    private fun setUI(data: NewsViewModel.ViewState?) {
+        adapter.submitList(data?.news)
+        if (binding.newsRecyclerView.computeVerticalScrollOffset() > 0) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.new_headlines_message),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -83,6 +93,11 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
             adapter.filter.filter(newText)
             return true
         }
+    }
+
+    override fun onDestroyView() {
+        viewModel.timerCancel()
+        super.onDestroyView()
     }
 
 }
