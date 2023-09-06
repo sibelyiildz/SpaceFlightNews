@@ -1,6 +1,16 @@
 package com.example.spaceflightnewsapp.data.local
 
-import com.example.spaceflightnewsapp.data.remote.service.Api
+class LocaleDataSource(private val spaceFlightNewsDao: SpaceFlightNewsDao) {
 
-class LocaleDataSource(private val api: Api) {
+    suspend fun getNews(): List<SpaceFlightNewsEntity> {
+        return spaceFlightNewsDao.getNews()
+    }
+    suspend fun insertNews(spaceFlightNewsEntity: SpaceFlightNewsEntity) {
+        return spaceFlightNewsDao.insertNews(spaceFlightNewsEntity)
+    }
+
+    suspend fun deleteNews(spaceFlightNewsEntity: SpaceFlightNewsEntity) {
+        return spaceFlightNewsDao.deleteNews(spaceFlightNewsEntity)
+    }
+
 }

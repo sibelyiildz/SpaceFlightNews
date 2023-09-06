@@ -3,16 +3,17 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.example.spaceflightnewsapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.spaceflightnewsapp"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -20,7 +21,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField('String', 'BASE_URL', '"https://api.spaceflightnewsapi.net/v4/"')
+            versionNameSuffix = "-dev"
+        }
         release {
+            buildConfigField('String', 'BASE_URL', '"https://api.spaceflightnewsapi.net/v4/"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -74,4 +80,15 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:6.0.0"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+
+    def roomVersion = "2.6.0-beta01"
+    //Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
 }

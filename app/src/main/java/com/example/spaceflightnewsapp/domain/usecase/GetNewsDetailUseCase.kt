@@ -1,5 +1,6 @@
 package com.example.spaceflightnewsapp.domain.usecase
 
+import com.example.spaceflightnewsapp.base.BaseUseCase
 import com.example.spaceflightnewsapp.data.remote.model.NewsModel
 import com.example.spaceflightnewsapp.domain.repository.NewsRepository
 import com.example.spaceflightnewsapp.util.Resource

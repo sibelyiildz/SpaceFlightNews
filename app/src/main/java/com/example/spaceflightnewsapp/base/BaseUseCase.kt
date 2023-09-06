@@ -1,4 +1,4 @@
-package com.example.spaceflightnewsapp.domain.usecase
+package com.example.spaceflightnewsapp.base
 
 import com.example.spaceflightnewsapp.util.Resource
 

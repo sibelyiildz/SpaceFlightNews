@@ -50,9 +50,23 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         }
     }
 
-    private fun initialize(){
+    private fun initialize() {
         binding.newsRecyclerView.adapter = adapter
         binding.newsRecyclerView.addItemDecoration(spaceDecorator)
+
+        binding.insertButton.setOnClickListener {
+            viewModel.saveNewsToRoom(60)
+        }
+        binding.getButton.setOnClickListener {
+            viewModel.fetchNewsFromRoom()
+        }
+
+        viewModel.saveNews.observe(viewLifecycleOwner) {
+            Log.v("LogTag", "saveNews ->$it")
+        }
+        viewModel.fetchNewsFromRoom.observe(viewLifecycleOwner) {
+            Log.v("LogTag", "fetchNewsFromRoom ->$it")
+        }
 
     }
 

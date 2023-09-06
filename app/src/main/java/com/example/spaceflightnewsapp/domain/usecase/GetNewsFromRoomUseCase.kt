@@ -1,17 +1,17 @@
 package com.example.spaceflightnewsapp.domain.usecase
 
 import com.example.spaceflightnewsapp.base.BaseUseCase
-import com.example.spaceflightnewsapp.data.remote.model.ArticlesResponse
+import com.example.spaceflightnewsapp.data.local.SpaceFlightNewsEntity
 import com.example.spaceflightnewsapp.domain.repository.NewsRepository
 import com.example.spaceflightnewsapp.util.Resource
 
-class GetNewsUseCase constructor(
+class GetNewsFromRoomUseCase constructor(
     private val repository: NewsRepository,
-) : BaseUseCase<Unit, ArticlesResponse>() {
+) : BaseUseCase<Unit, List<SpaceFlightNewsEntity>>() {
 
-    override suspend fun execute(request: Unit): Resource<ArticlesResponse> {
+    override suspend fun execute(request: Unit): Resource<List<SpaceFlightNewsEntity>> {
         return try {
-            Resource.Success(repository.getArticles())
+            Resource.Success(repository.getNews())
         } catch (e: Exception) {
             Resource.Failure(e)
         }

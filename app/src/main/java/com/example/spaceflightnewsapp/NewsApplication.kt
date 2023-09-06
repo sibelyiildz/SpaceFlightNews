@@ -1,8 +1,7 @@
 package com.example.spaceflightnewsapp
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
+import com.example.spaceflightnewsapp.di.dataBaseModule
 import com.example.spaceflightnewsapp.di.networkModule
 import com.example.spaceflightnewsapp.di.repositoryModule
 import com.example.spaceflightnewsapp.di.useCaseModule
@@ -14,19 +13,10 @@ class NewsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mContext = applicationContext
         GlobalContext.startKoin {
             androidContext(this@NewsApplication)
-            modules(networkModule, viewModelModule, repositoryModule, useCaseModule)
+            modules(networkModule, dataBaseModule, viewModelModule, repositoryModule, useCaseModule)
         }
     }
 
-    companion object {
-        @SuppressLint("StaticFieldLeak") // for debug app
-        @JvmStatic
-        var mContext: Context? = null
-        fun getContext(): Context? {
-            return mContext
-        }
-    }
 }
