@@ -34,9 +34,14 @@ class NewsViewModel(
     private var viewState = ViewState()
     private var timer: CountDownTimer? = null
 
+    companion object {
+        private const val ONE_MINUTE = 6000L
+        private const val ONE_SECOND = 1000L
+    }
+
     init {
-        timer = countDownTimer(millisInFuture = 5000,
-            countDownInterval = 1000,
+        timer = countDownTimer(millisInFuture = ONE_MINUTE,
+            countDownInterval = ONE_SECOND,
             onTick = {},
             onFinish = {
                 fetchNews(true)
