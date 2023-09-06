@@ -18,7 +18,8 @@ data class NewsModel(
     val summary: String?,
     val title: String?,
     val updated_at: String?,
-    val url: String?
+    val url: String?,
+    var isSave: Boolean = false,
 )
 
 data class Event(

@@ -11,7 +11,14 @@ class GetNewsUseCase constructor(
 
     override suspend fun execute(request: Unit): Resource<ArticlesResponse> {
         return try {
-            Resource.Success(repository.getArticles())
+            val newsFromLocal = repository.getNews()
+            val newsFromRemote = repository.getArticles()
+
+            newsFromRemote.results?.map { news ->
+                val localNews = newsFromLocal.find { it.id == news.id }
+                news.isSave = localNews != null
+            }
+            Resource.Success(newsFromRemote)
         } catch (e: Exception) {
             Resource.Failure(e)
         }

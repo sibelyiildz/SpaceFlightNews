@@ -24,6 +24,10 @@ class NewsRepositoryImp(
         localDataSource.insertNews(spaceFlightNewsEntity)
     }
 
+    override suspend fun deleteNews(spaceFlightNewsEntity: SpaceFlightNewsEntity) {
+        localDataSource.deleteNews(spaceFlightNewsEntity)
+    }
+
     override suspend fun getNews(): List<SpaceFlightNewsEntity> {
         return localDataSource.getNews()
     }

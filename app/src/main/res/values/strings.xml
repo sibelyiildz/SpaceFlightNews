@@ -4,4 +4,6 @@
     <string name="okay">Okay</string>
     <string name="search_view_hint">Search News</string>
     <string name="new_headlines_message">New headlines added</string>
+    <string name="add_reading_list">Add to my reading list</string>
+    <string name="remove_reading_list">Remove from my reading list</string>
 </resources>

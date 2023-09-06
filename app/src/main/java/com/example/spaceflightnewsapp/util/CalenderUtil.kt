@@ -16,5 +16,5 @@ fun convertDateToFormat(date: String?, dateFormat: DateFormat): String {
 
 enum class DateFormat(val format: String) {
     DAY_MONTH_YEAR("dd MMMM yyy"),
-    DAY_MONTH_WITH_HOUR_MINUTE("dd MMMM  HH:mm"),
+    DAY_MONTH_WITH_HOUR_MINUTE("dd MMM  HH:mm"),
 }

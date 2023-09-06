@@ -1,5 +1,6 @@
 package com.example.spaceflightnewsapp.di
 
+import com.example.spaceflightnewsapp.domain.usecase.DeleteNewsFromRoomUseCase
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsDetailUseCase
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsFromRoomUseCase
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsUseCase
@@ -11,4 +12,5 @@ val useCaseModule = module {
     factory { GetNewsDetailUseCase(get()) }
     factory { GetNewsFromRoomUseCase(get()) }
     factory { InsertNewsToRoomUseCase(get()) }
+    factory { DeleteNewsFromRoomUseCase(get()) }
 }

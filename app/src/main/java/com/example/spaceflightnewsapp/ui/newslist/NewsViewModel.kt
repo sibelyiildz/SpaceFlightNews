@@ -4,9 +4,9 @@ import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.spaceflightnewsapp.data.local.SpaceFlightNewsEntity
 import com.example.spaceflightnewsapp.data.remote.model.NewsModel
-import com.example.spaceflightnewsapp.domain.usecase.GetNewsFromRoomUseCase
+import com.example.spaceflightnewsapp.domain.model.UpdateReadingListModel
+import com.example.spaceflightnewsapp.domain.usecase.DeleteNewsFromRoomUseCase
 import com.example.spaceflightnewsapp.domain.usecase.GetNewsUseCase
 import com.example.spaceflightnewsapp.domain.usecase.InsertNewsToRoomUseCase
 import com.example.spaceflightnewsapp.extension.toLiveData
@@ -19,17 +19,14 @@ import kotlinx.coroutines.launch
 class NewsViewModel(
     private val getNewsUseCase: GetNewsUseCase,
     private val insertNewsToRoomUseCase: InsertNewsToRoomUseCase,
-    private val getNewsFromRoomUseCase: GetNewsFromRoomUseCase,
+    private val deleteNewsFromRoomUseCase: DeleteNewsFromRoomUseCase,
 ) : ViewModel() {
 
     private val _news = MutableLiveData<Result<ViewState>>()
     val news = _news.toLiveData()
 
-    private val _saveNews = MutableLiveData<Result<Unit>>()
-    val saveNews = _saveNews.toSingleEvent()
-
-    private val _fetchNewsFromRoom = MutableLiveData<Result<List<SpaceFlightNewsEntity>>>()
-    val fetchNewsFromRoom = _fetchNewsFromRoom.toSingleEvent()
+    private val _updateReadingList = MutableLiveData<Result<UpdateReadingListModel>>()
+    val updateReadingList = _updateReadingList.toSingleEvent()
 
     private var viewState = ViewState()
     private var timer: CountDownTimer? = null
@@ -69,32 +66,41 @@ class NewsViewModel(
         }
     }
 
-    fun saveNewsToRoom(id: Int) {
+    fun updateReadingList(newsId: Int, isSave: Boolean) {
+        if (isSave) {
+            saveNewsToRoom(newsId)
+        } else {
+            deleteNewsFromRoom(newsId)
+        }
+    }
+
+    private fun saveNewsToRoom(id: Int) {
         viewModelScope.launch {
-            _saveNews.postValue(Result.Loading)
+            _updateReadingList.postValue(Result.Loading)
             when (val response =
                 insertNewsToRoomUseCase.execute(InsertNewsToRoomUseCase.Request(id))) {
-                is Resource.Failure -> {
-                    _saveNews.postValue(Result.Error(response.error))
+                is Resource.Success -> {
+                    _updateReadingList.postValue(Result.Success(UpdateReadingListModel(id, true)))
                 }
 
-                is Resource.Success -> {
-                    _saveNews.postValue(Result.Success(response.data))
+                is Resource.Failure -> {
+                    _updateReadingList.postValue(Result.Error(response.error))
                 }
             }
         }
     }
 
-    fun fetchNewsFromRoom() {
+    private fun deleteNewsFromRoom(id: Int) {
         viewModelScope.launch {
-            _saveNews.postValue(Result.Loading)
-            when (val response = getNewsFromRoomUseCase.execute(Unit)) {
-                is Resource.Failure -> {
-                    _fetchNewsFromRoom.postValue(Result.Error(response.error))
+            _updateReadingList.postValue(Result.Loading)
+            when (val response =
+                deleteNewsFromRoomUseCase.execute(DeleteNewsFromRoomUseCase.Request(id))) {
+                is Resource.Success -> {
+                    _updateReadingList.postValue(Result.Success(UpdateReadingListModel(id, false)))
                 }
 
-                is Resource.Success -> {
-                    _fetchNewsFromRoom.postValue(Result.Success(response.data))
+                is Resource.Failure -> {
+                    _updateReadingList.postValue(Result.Error(response.error))
                 }
             }
         }

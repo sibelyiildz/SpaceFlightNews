@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceflightnewsapp.NavGraphDirections
+import com.example.spaceflightnewsapp.R
 import com.example.spaceflightnewsapp.data.remote.model.NewsModel
 import com.example.spaceflightnewsapp.databinding.ListItemNewsBinding
 import com.example.spaceflightnewsapp.extension.setImageUrl
 import com.example.spaceflightnewsapp.util.DateFormat
 import com.example.spaceflightnewsapp.util.convertDateToFormat
 
-class NewsAdapter() : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filterable {
+class NewsAdapter(private val saveButtonOnClick: (id: Int, isSave: Boolean) -> Unit) :
+    ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filterable {
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<NewsModel>() {
             override fun areItemsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
@@ -56,6 +58,11 @@ class NewsAdapter() : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filt
         holder.bindData(currentList[position])
     }
 
+    fun updateItem(id: Int, isSave: Boolean) {
+        currentList.find { it.id == id }?.isSave = isSave
+        notifyItemChanged(currentList.indexOf(currentList.find { it.id == id }))
+    }
+
     inner class ViewHolder(private val binding: ListItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: NewsModel) {
@@ -65,8 +72,13 @@ class NewsAdapter() : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(DIFF), Filt
                 newsSite.text = data.news_site
                 publishedDate.text =
                     convertDateToFormat(data.published_at, DateFormat.DAY_MONTH_WITH_HOUR_MINUTE)
-                newsImage.setImageUrl(binding.root.context, data.image_url)
+                newsImage.setImageUrl(root.context, data.image_url)
+                addReadingList.text =
+                    root.context.getString(if (data.isSave) R.string.remove_reading_list else R.string.add_reading_list)
 
+                addReadingList.setOnClickListener {
+                    saveButtonOnClick.invoke(data.id, data.isSave.not())
+                }
                 root.setOnClickListener {
                     it.findNavController()
                         .navigate(NavGraphDirections.actionNewsDetailFragment(data.id))

@@ -16,6 +16,7 @@
         <item name="toolbarStyle">@style/SpaceFlight.Toolbar</item>
         <item name="android:colorEdgeEffect">@color/suva_gray</item>
         <item name="android:colorBackground">@color/ghost_white</item>
+        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

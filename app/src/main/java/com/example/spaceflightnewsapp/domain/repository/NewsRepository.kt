@@ -12,5 +12,7 @@ interface NewsRepository {
 
     suspend fun insertNews(spaceFlightNewsEntity: SpaceFlightNewsEntity)
 
+    suspend fun deleteNews(spaceFlightNewsEntity: SpaceFlightNewsEntity)
+
     suspend fun getNews(): List<SpaceFlightNewsEntity>
 }
