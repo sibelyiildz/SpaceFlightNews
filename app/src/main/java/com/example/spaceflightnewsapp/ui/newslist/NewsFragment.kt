@@ -9,6 +9,7 @@ import com.example.spaceflightnewsapp.base.BaseFragment
 import com.example.spaceflightnewsapp.databinding.FragmentNewsBinding
 import com.example.spaceflightnewsapp.domain.model.UpdateReadingListModel
 import com.example.spaceflightnewsapp.extension.errorDialog
+import com.example.spaceflightnewsapp.extension.isTrue
 import com.example.spaceflightnewsapp.util.Result
 import com.example.spaceflightnewsapp.util.SpaceItemDecorationVertical
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -71,7 +72,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
 
     private fun setUI(data: NewsViewModel.ViewState?) {
         adapter.submitList(data?.news)
-        if (binding.newsRecyclerView.computeVerticalScrollOffset() > 0) {
+        if (data?.isNewNews.isTrue() && binding.newsRecyclerView.computeVerticalScrollOffset() > 0) {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.new_headlines_message),

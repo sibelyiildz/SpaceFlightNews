@@ -32,7 +32,7 @@ class NewsViewModel(
     private var timer: CountDownTimer? = null
 
     companion object {
-        private const val ONE_MINUTE = 6000L
+        private const val ONE_MINUTE = 60000L
         private const val ONE_SECOND = 1000L
     }
 
@@ -52,8 +52,14 @@ class NewsViewModel(
             if (isFromTimer.not()) _news.postValue(Result.Loading)
             when (val response = getNewsUseCase.execute(Unit)) {
                 is Resource.Success -> {
-                    if (viewState.news != response.data.results) {
-                        viewState = viewState.copy(news = response.data.results, isNewNews = true)
+                    if (isFromTimer) {
+                        if (viewState.news != response.data.results) {
+                            viewState =
+                                viewState.copy(news = response.data.results, isNewNews = true)
+                            _news.postValue(Result.Success(viewState))
+                        }
+                    } else {
+                        viewState = viewState.copy(news = response.data.results, isNewNews = false)
                         _news.postValue(Result.Success(viewState))
                     }
                 }
