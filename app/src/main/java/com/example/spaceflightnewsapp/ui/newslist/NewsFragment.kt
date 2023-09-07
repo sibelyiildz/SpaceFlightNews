@@ -8,6 +8,7 @@ import com.example.spaceflightnewsapp.R
 import com.example.spaceflightnewsapp.base.BaseFragment
 import com.example.spaceflightnewsapp.databinding.FragmentNewsBinding
 import com.example.spaceflightnewsapp.domain.model.UpdateReadingListModel
+import com.example.spaceflightnewsapp.extension.easyCloseableKeyboard
 import com.example.spaceflightnewsapp.extension.errorDialog
 import com.example.spaceflightnewsapp.extension.isTrue
 import com.example.spaceflightnewsapp.util.Result
@@ -22,6 +23,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        easyCloseableKeyboard(view)
 
         initialize()
         setListeners()
