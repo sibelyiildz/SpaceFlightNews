@@ -12,6 +12,7 @@ import com.example.spaceflightnewsapp.NavGraphDirections
 import com.example.spaceflightnewsapp.R
 import com.example.spaceflightnewsapp.data.remote.model.NewsModel
 import com.example.spaceflightnewsapp.databinding.ListItemNewsBinding
+import com.example.spaceflightnewsapp.extension.setColor
 import com.example.spaceflightnewsapp.extension.setImageUrl
 import com.example.spaceflightnewsapp.util.DateFormat
 import com.example.spaceflightnewsapp.util.convertDateToFormat
@@ -75,6 +76,7 @@ class NewsAdapter(private val saveButtonOnClick: (id: Int, isSave: Boolean) -> U
                 newsImage.setImageUrl(root.context, data.image_url)
                 addReadingList.text =
                     root.context.getString(if (data.isSave) R.string.remove_reading_list else R.string.add_reading_list)
+                addReadingList.setColor(if (data.isSave) R.color.red else R.color.green)
 
                 addReadingList.setOnClickListener {
                     saveButtonOnClick.invoke(data.id, data.isSave.not())

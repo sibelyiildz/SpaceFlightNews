@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceflightnewsapp.extension.dp
 
 class SpaceItemDecorationVertical(
-    private val margin: Int = 12.dp,
+    private val margin: Int = 16.dp,
     private val lastDraw: Boolean = true
 ) :
     RecyclerView.ItemDecoration() {

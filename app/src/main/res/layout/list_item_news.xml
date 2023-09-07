@@ -28,7 +28,8 @@
             android:id="@+id/newsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.16"
+            android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.12"
+            android:textColor="@color/slate_grey"
             tools:text="News Title" />
 
         <TextView
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
+            android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.12"
+            android:textColor="@color/slate_grey"
             tools:text="News Description" />
 
         <LinearLayout
@@ -52,8 +54,8 @@
                 android:id="@+id/newsSite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.14"
-                android:textColor="@color/purple_navy"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.10"
+                android:textColor="@color/light_blue"
                 tools:text="News Site" />
 
             <View
@@ -66,15 +68,17 @@
                 android:id="@+id/publishedDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
-                android:textColor="@color/suva_gray"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.10"
+                android:textColor="@color/light_blue"
                 tools:text="published date" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addReadingList"
+            style="@style/Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/green"
             tools:text="Add to my reading list" />
 
     </LinearLayout>

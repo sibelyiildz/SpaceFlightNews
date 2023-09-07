@@ -39,7 +39,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/margin100"
                 android:layout_gravity="bottom"
                 android:background="@drawable/title_bg" />
 
@@ -82,8 +82,8 @@
                     android:id="@+id/newsSite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.12"
-                    android:textColor="@color/purple_navy"
+                    android:textAppearance="@style/SpaceFlight.TextAppearance.Bold.10"
+                    android:textColor="@color/light_blue"
                     tools:text="News Site" />
 
                 <View
@@ -96,8 +96,8 @@
                     android:id="@+id/publishedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.12"
-                    android:textColor="@color/suva_gray"
+                    android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.10"
+                    android:textColor="@color/light_blue"
                     tools:text="published date" />
             </LinearLayout>
 
@@ -105,9 +105,8 @@
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.14"
+                android:textAppearance="@style/SpaceFlight.TextAppearance.Regular.12"
                 android:textColor="@color/slate_grey"
-                android:textStyle="bold"
                 tools:text="lorem" />
 
         </LinearLayout>
